@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+    }
+    header {
+      background: #4a90e2;
+      padding: 15px;
+      color: white;
+      text-align: center;
+    }
+    table {
+      width: 80%;
+      margin: 30px auto;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    table th, table td {
+      padding: 15px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    .checkout {
+      display: flex;
+      justify-content: center;
+      margin: 20px;
+    }
+    button {
+      padding: 12px 20px;
+      background: #4a90e2;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover { background: #357ab8; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Your Cart</h1>
+  </header>
+
+  <table>
+    <tr>
+      <th>Book</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Total</th>
+    </tr>
+    <tr>
+      <td>It ends with us</td>
+      <td>Rs.480</td>
+      <td>1</td>
+      <td>Rs.480</td>
+    </tr>
+    <tr>
+      <td>It starts with us</td>
+      <td>Rs.450</td>
+      <td>1</td>
+      <td>Rs.450</td>
+    </tr>
+
+     </table>
+
+  <div class="checkout">
+    <button>Proceed to Checkout</button>
+  </div>
+
+  <script>
+    let cart1 = JSON.parse(localStorage.getItem("cart")) || [];
+    let table = document.querySelector("table");
+
+    cart1.forEach(item => {
+      let row = table.insertRow();
+      row.innerHTML = `
+        <td>${item.title}</td>
+        <td>Rs ${item.price}</td>
+        <td>${item.qty}</td>
+        <td>Rs ${item.price * item.qty}</td>
+      `;
+    });
+
+    document.querySelector("button").addEventListener("click", () => {
+      if(cart1.length === 0) {
+          alert("Your cart is empty!");
+      } else {
+          alert("Order placed successfully!");
+          localStorage.removeItem("cart1");  
+          window.location.href = "books_list1	.html"; 
+      }
+    });
+  </script>
+</body>
+</html>
