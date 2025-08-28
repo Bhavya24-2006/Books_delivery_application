@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Books Listing</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+    }
+    header {
+      background: #4a90e2;
+      padding: 15px;
+      color: white;
+      text-align: center;
+    }
+    .books {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .book {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .book img {
+      width: 100px;
+      height: 150px;
+    }
+    .book button {
+      background: #4a90e2;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      margin-top: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .book button:hover { background: #357ab8; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Available Books</h1>
+  </header>
+
+  <section class="books">
+    <div class="book">
+      <img src="C:\Users\harsh\Downloads\it ends with us.jpeg" alt="Book 1">
+      <h3>It ends with us</h3>
+      <p>Rs 400</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="book">
+      <img src="C:\Users\harsh\Downloads\It starts with us.jpeg" alt="Book 2">
+      <h3>It starts with us</h3>
+      <p>Rs 450</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="book">
+      <img src="C:\Users\harsh\Downloads\harry potter.jpeg" alt="Book 3">
+      <h3>Harry Potter</h3>
+      <p>Rs 700</p>
+      <button>Add to Cart</button>
+    </div>
+  </section>
+
+  <script>
+    if(! localStorage.getItem("loggedInUser")) {
+      window.location.href = "login_page1.html";
+    }
+
+    function addToCart(title, price) {
+      let cart = JSON.parse(localStorage.getItem("cart1")) || [ ] ;
+      let existing = cart1.find(item => item.title === title);
+
+      if(existing) {
+          existing.qty += 1;
+      } else {
+          cart1.push({ title: title, price: price, qty: 1 });
+      }
+
+      localStorage.setItem("cart1", JSON.stringify(cart1));
+      alert(title + " added to cart1!");
+
+     window.location.href="cart1.html";
+    }
+
+    document.querySelectorAll(".book").forEach(book => {
+      let title = book.querySelector("h3").innerText;
+      let price = parseInt(book.querySelector("p").innerText.replace("Rs ", " "));
+      book.querySelector("button").addEventListener("click", () => addToCart1(title, price));
+    });
+  </script>
+</body>
+</html>
